@@ -20,7 +20,7 @@ Además, añade estos campos a la interfaz y al reporte PDF de la orden de venta
 
 1. **Clonar el repositorio** o descargar el proyecto.
    
-2. **Ubicarse en la carpeta raíz** del proyecto (`proyecto-ExamenOdoo`):
+2. **Ubicarse en la carpeta raíz** del proyecto (`Examen-Desarrollo-Odoo`):
    ```bash
    cd proyecto-ExamenOdoo
 
@@ -43,18 +43,16 @@ el sales para a continuacion activar el modulo " Dimensional Sales (Qty from L×
 
     Pasos: 
 
-        1 Ubicarse en la carpeta raíz del proyecto (`proyecto-ExamenOdoo`):
-            ```bash
-         cd proyecto-ExamenOdoo
-
-        2. Ejecutar las pruebas directamente en consola y cierra proceso al finalizar:
-            ```bash
-            docker compose -f docker-compose_test.yml up --abort-on-container-exit
+1. **Ubicarse en la carpeta raíz** del proyecto (`Examen-Desarrollo-Odoo`):
+  ```bash
+    cd proyecto-ExamenOdoo
 
 
-         En caso de querer dejar logs se puede usar 
-         ```bash
-          docker compose -f docker-compose_test.yml run --rm test > test_output.log 2>&1
+2. **Ejecutar las pruebas** directamente en consola y cierra proceso al finalizar:
+  ```bash
+    docker compose -f docker-compose_test.yml up --abort-on-container-exit
 
+
+        
 
 
