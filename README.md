@@ -43,13 +43,13 @@ el sales para a continuacion activar el modulo " Dimensional Sales (Qty from L×
 
     Pasos: 
 
-1. **Ubicarse en la carpeta raíz** del proyecto (`Examen-Desarrollo-Odoo`):
-  ```bash
-    cd proyecto-ExamenOdoo
+1. **Ubicarse en la carpeta raíz** del proyecto (`proyecto-ExamenOdoo`):
+   ```bash
+   cd proyecto-ExamenOdoo
 
 
 2. **Ejecutar las pruebas** directamente en consola y cierra proceso al finalizar:
-  ```bash
+ ```bash
     docker compose -f docker-compose_test.yml up --abort-on-container-exit
 
 
