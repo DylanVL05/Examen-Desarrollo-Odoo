@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Pequeños estilos para ancho de columnas de dimensiones -->
+  <template id="report_dim_styles" inherit_id="web.external_layout_standard">
+    <xpath expr="//head" position="inside">
+      <style type="text/css">
+        .dim-col { width: 12%; }
+      </style>
+    </xpath>
+  </template>
+</odoo>

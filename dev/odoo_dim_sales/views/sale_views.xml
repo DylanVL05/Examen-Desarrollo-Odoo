@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_order_form_dim" model="ir.ui.view">
+    <field name="name">sale.order.form.dimensions</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+
+      <!-- Hacer editable el list embebido y añadir L/A/H -->
+      <xpath expr="//field[@name='order_line']/list" position="attributes">
+        <attribute name="editable">bottom</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
+        <field name="x_length"/>
+        <field name="x_width"/>
+        <field name="x_height"/>
+      </xpath>
+
+      <!-- Cantidad solo lectura para evitar edición manual -->
+      <xpath expr="//field[@name='order_line']/list/field[@name='product_uom_qty']" position="attributes">
+        <attribute name="readonly">1</attribute>
+      </xpath>
+
+      <!-- Formulario de línea: grupo de dimensiones -->
+      <xpath expr="//field[@name='order_line']/form//group" position="inside">
+        <group string="Dimensiones (m)">
+          <field name="x_length"/>
+          <field name="x_width"/>
+          <field name="x_height"/>
+          <field name="product_uom_qty" readonly="1"/>
+        </group>
+      </xpath>
+
+    </field>
+  </record>
+</odoo>
+
