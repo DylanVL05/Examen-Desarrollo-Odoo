@@ -1,0 +1,55 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  odoo:
+    image: odoo:18.0
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - ./dev:/mnt/extra-addons  # relativo a la carpeta del YAML
+      - odoo-data:/var/lib/odoo
+    command: >
+      bash -c "
+        echo '⏳ Esperando a que la base de datos esté lista...';
+        until pg_isready -h db -U odoo > /dev/null 2>&1; do
+          sleep 1;
+        done;
+        echo '✅ Base de datos disponible.';
+
+        DB_EXISTS=$(psql -h db -U odoo -tAc \"SELECT 1 FROM pg_database WHERE datname='demo_db'\")
+        if [ \"$DB_EXISTS\" != \"1\" ]; then
+          echo '📦 Creando base de datos demo_db e instalando módulos...';
+          odoo -d demo_db --db_host=db --db_user=odoo --db_password=odoo \
+               -i sale,odoo_dim_sales --without-demo=all --stop-after-init;
+
+          if [ $? -eq 0 ]; then
+            echo '✅ Módulos instalados correctamente.';
+          else
+            echo '❌ Error instalando módulos.' && exit 1;
+          fi
+        else
+          echo 'ℹ️ Base de datos demo_db ya existe. Arrancando sin reinstalar.';
+        fi
+
+        echo '🚀 Arrancando Odoo listo para usar en http://localhost:8069';
+        exec odoo -d demo_db --db_host=db --db_user=odoo --db_password=odoo
+      "
+
+volumes:
+  db-data:
+  odoo-data:

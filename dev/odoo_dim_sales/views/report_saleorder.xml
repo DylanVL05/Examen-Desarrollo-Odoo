@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_saleorder_dim_inherit" inherit_id="sale.report_saleorder_document">
+
+    <!-- Encabezado: reemplazar fila de títulos -->
+    <xpath expr="//table[contains(@class,'o_main_table') or contains(@class,'table')]/thead/tr" position="replace">
+      <tr>
+        <th>Descripción</th>
+        <th>Largo</th>
+        <th>Ancho</th>
+        <th>Alto</th>
+        <th class="text-right">Precio</th>
+        <th class="text-right">Impuestos</th>
+        <th class="text-right">Subtotal</th>
+      </tr>
+    </xpath>
+
+    <!-- Cuerpo: reemplazar filas de detalle -->
+    <xpath expr="//table[contains(@class,'o_main_table') or contains(@class,'table')]/tbody" position="replace">
+      <tbody>
+        <tr t-foreach="doc.order_line" t-as="line">
+          <td><span t-field="line.name"/></td>
+          <td t-esc="line.x_length or 0"/>
+          <td t-esc="line.x_width or 0"/>
+          <td t-esc="line.x_height or 0"/>
+          <td class="text-right"><span t-field="line.price_unit"/></td>
+          <td class="text-right">
+            <span t-esc="', '.join(line.tax_id.mapped('name'))"/>
+          </td>
+          <td class="text-right"><span t-field="line.price_subtotal"/></td>
+        </tr>
+      </tbody>
+    </xpath>
+
+  </template>
+</odoo>

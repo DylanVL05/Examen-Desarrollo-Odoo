@@ -1,0 +1,21 @@
+time="2025-08-15T21:39:18-06:00" level=warning msg="/home/dylan/proyecto-ExamenOdoo/docker-compose_test.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+time="2025-08-15T21:39:18-06:00" level=warning msg="Found orphan containers ([proyecto-examenodoo-odoo-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container proyecto-examenodoo-db-1  Running
+⏳ Esperando a que la base de datos esté lista...
+✅ Base de datos disponible.
+🧪 Ejecutando pruebas del módulo odoo_dim_sales...
+2025-08-16 03:39:19,984 12 INFO ? odoo: Odoo version 18.0-20250807 
+2025-08-16 03:39:19,985 12 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2025-08-16 03:39:19,985 12 INFO ? odoo: addons paths: ['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/18.0', '/mnt/extra-addons'] 
+2025-08-16 03:39:19,985 12 INFO ? odoo: database: odoo@db:default 
+Warn: Can't find .pfb for face 'Courier'
+2025-08-16 03:39:20,263 12 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf 
+2025-08-16 03:39:20,274 12 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltoimage binary at /usr/local/bin/wkhtmltoimage 
+2025-08-16 03:39:20,478 12 INFO ? odoo.service.server: HTTP service (werkzeug) running on faab0bbd6a07:8069 
+2025-08-16 03:39:20,500 12 INFO demo_db odoo.modules.loading: loading 1 modules... 
+2025-08-16 03:39:20,507 12 INFO demo_db odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2025-08-16 03:39:20,515 12 INFO demo_db odoo.modules.loading: loading 12 modules... 
+2025-08-16 03:39:20,777 12 INFO demo_db odoo.modules.loading: 12 modules loaded in 0.26s, 0 queries (+0 extra) 
+2025-08-16 03:39:20,812 12 INFO demo_db odoo.modules.loading: Modules loaded. 
+2025-08-16 03:39:20,815 12 INFO demo_db odoo.modules.registry: Registry loaded in 0.335s 
+
