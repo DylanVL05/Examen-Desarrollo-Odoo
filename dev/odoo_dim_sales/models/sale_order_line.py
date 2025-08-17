@@ -38,7 +38,7 @@ class SaleOrderLine(models.Model):
     @api.depends("x_length", "x_width", "x_height")
     def _compute_dimension_qty(self) -> None:
         for line in self:
-            l = line.x_length or 0.0
+            l = line.x_length or 0.0                        # Valores nulos o ceros
             w = line.x_width or 0.0
             h = line.x_height or 0.0
             qty = max(l * w * h, 0.0)
@@ -46,13 +46,23 @@ class SaleOrderLine(models.Model):
             # Fuente única de verdad: sincroniza la cantidad real de venta
             line.product_uom_qty = qty
 
-    @api.onchange("x_length", "x_width", "x_height")
-    def _onchange_dimensions(self) -> None:
+    @api.onchange('x_length', 'x_width', 'x_height')
+    def _onchange_dimensions(self):
         for line in self:
             l = line.x_length or 0.0
             w = line.x_width or 0.0
             h = line.x_height or 0.0
-            line.product_uom_qty = max(l * w * h, 0.0)
+            qty = max(l * w * h, 0.0)
+            line.product_uom_qty = qty
+            line.x_dimension_qty = qty
+            if l == 0 and w == 0 and h == 0:
+                return {
+                    'warning': {
+                        'title': "Dimensiones vacías",
+                        'message': "Todas las dimensiones son 0 → la cantidad será 0 y el subtotal quedará en 0.",
+                    }
+                }                     #Mensaje de advertencia si todas las dimensiones son 0
+                   
 
     @api.model
     def create(self, vals: dict) -> models.Model:

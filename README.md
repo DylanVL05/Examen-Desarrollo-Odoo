@@ -8,7 +8,7 @@ Además, añade estos campos a la interfaz y al reporte PDF de la orden de venta
 -----------------------------------------------------------------------------
 ## 📦 Requerimientos
 
-- **Docker** y **Docker Compose** instalados.
+- **Docker** y **Docker Compose** instalados (Docker Desktop si es Win).
 - **Puerto 8069** libre en la máquina local.
 - **Internet** para descargar imágenes de Docker.
 - No se necesita instalación previa de Odoo o PostgreSQL.  
@@ -38,21 +38,45 @@ el sales para a continuacion activar el modulo " Dimensional Sales (Qty from L×
 
 ## Correr la prueba o test  
 
-    Parar la ejecucion actual del Test prepare un YAML llamado "docker-compose.test.yml" 
-    para pruebas aparte para evitar choque de puertos o algun problema 
+    Parar la ejecucion actual del test se hace luego de levantar el docker (ya sea win o linux) prepare un script que se debe ejecutar luego de tener el container up , dicho script ejecuta las pruebas de forma aislada en una base momentanea para hacer el test lo completa y luego cierra
 
-    Pasos: 
+    1. **Si se ejecuta en Linux se debe ejecutar** "run_test.sh"
+       ```bash
+        sudo ./run_test.sh
 
-1. **Ubicarse en la carpeta raíz** del proyecto (`proyecto-ExamenOdoo`):
-   ```bash
-   cd proyecto-ExamenOdoo
+    
+    2. **Si se ejecuta en windows se debe ejecutar** "run_test.ps1"
+   
+    - Abres powershell como administrador
+    -vas a cd C:\ruta\a\proyecto-ExamenOdoo
+    - Y ejecutas .\run_tests.ps1
+
+      
+
+   
 
 
-2. **Ejecutar las pruebas** directamente en consola y cierra proceso al finalizar:
- ```bash
-    docker compose -f docker-compose_test.yml up --abort-on-container-exit
+## Notas importantes del modulo
+
+📖 Manejo de Unidades de Medida (UoM)
+
+El cálculo de cantidad se realiza como: 
+   "Cantidad = Largo × Ancho × Alto"  (interpretado en metros cubicos si las dimensiones estan en metros)
+      
+
+      -En caso de que el producto posee una UoM distinta no se realiza conversion automatica, en este caso hay 2 opciones:
+
+      1.Configurar la unidad de medida base
+
+      2.Agregar en el modulo la capacidad de conversion utilizando
+      product_uom._compute_quantity(...)
 
 
-        
+
+
+    
+
+
+
 
 

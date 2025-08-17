@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# BD temporal para pruebas (no ensucia tu demo_db)
+# BD temporal para pruebas (evita ensuciar la bd principal)
 TEST_DB="demo_db_test_$(date +%Y%m%d_%H%M%S)_$RANDOM"
 echo "→ Running tests in DB: $TEST_DB"
 
 # Asegura que db/odoo estén arriba (idempotente)
 docker compose up -d db odoo
 
-# Ejecuta pruebas con aislamiento
+# Ejecutar pruebas con aislamiento
 docker compose run --rm odoo \
   --db_host=db --db_user=odoo --db_password=odoo \
   -d "$TEST_DB" \
