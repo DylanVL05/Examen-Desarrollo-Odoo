@@ -32,12 +32,13 @@ services:
       - odoo-data:/var/lib/odoo
     command: >
       bash -lc "
+        export PGPASSWORD=odoo;
         echo '⏳ Esperando a que la base de datos esté lista...';
         until pg_isready -h db -U odoo -d postgres > /dev/null 2>&1; do
           sleep 1;
         done;
         echo '✅ Base de datos disponible.';
-
+        
         DB_EXISTS=$$(psql -h db -U odoo -d postgres -tAc \"SELECT 1 FROM pg_database WHERE datname='demo_db'\");
         if [ \"$$DB_EXISTS\" != \"1\" ]; then
           echo '📦 Creando base de datos demo_db e instalando módulos...';
