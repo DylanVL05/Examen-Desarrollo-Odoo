@@ -1,43 +1,48 @@
-version: '3.1'
+version: "3.1"
+name: proyecto-examenodoo
 
 services:
   db:
     image: postgres:15
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=odoo
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
     volumes:
       - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
   odoo:
     image: odoo:18.0
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8069:8069"
     environment:
-      - HOST=db
-      - USER=odoo
-      - PASSWORD=odoo
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
     volumes:
-      - ./dev:/mnt/extra-addons  # relativo a la carpeta del YAML
+      - ./dev:/mnt/extra-addons
       - odoo-data:/var/lib/odoo
     command: >
-      bash -c "
+      bash -lc "
         echo '⏳ Esperando a que la base de datos esté lista...';
-        until pg_isready -h db -U odoo > /dev/null 2>&1; do
+        until pg_isready -h db -U odoo -d postgres > /dev/null 2>&1; do
           sleep 1;
         done;
         echo '✅ Base de datos disponible.';
 
-        DB_EXISTS=$(psql -h db -U odoo -tAc \"SELECT 1 FROM pg_database WHERE datname='demo_db'\")
-        if [ \"$DB_EXISTS\" != \"1\" ]; then
+        DB_EXISTS=$$(psql -h db -U odoo -d postgres -tAc \"SELECT 1 FROM pg_database WHERE datname='demo_db'\");
+        if [ \"$$DB_EXISTS\" != \"1\" ]; then
           echo '📦 Creando base de datos demo_db e instalando módulos...';
-          odoo -d demo_db --db_host=db --db_user=odoo --db_password=odoo \
-               -i sale,odoo_dim_sales --without-demo=all --stop-after-init;
-
-          if [ $? -eq 0 ]; then
+          if odoo -d demo_db --db_host=db --db_user=odoo --db_password=odoo \
+                 -i sale,odoo_dim_sales --without-demo=all --stop-after-init; then
             echo '✅ Módulos instalados correctamente.';
           else
             echo '❌ Error instalando módulos.' && exit 1;
