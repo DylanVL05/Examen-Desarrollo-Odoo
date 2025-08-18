@@ -90,7 +90,7 @@ El modulo esta pensado para escenarios donde los productos se cotizan por volume
 
 Las unidades de las dimensiones están expresadas en metros (m) y se asume que el resultado (L×A×H) equivale a la cantidad en metros cúbicos.
 
-EL reporte de PDF  solo esconde cantidad en el saleorder ya que en la factura se debe dar otra vista heredada de otro QWEB , 
+EL reporte de PDF  solo esconde cantidad en el saleorder ya que en la factura se debe dar otra vista heredada de otra plantilla , 
 
 El reporte PDF de venta se hereda del estándar de Odoo y se modifica únicamente para añadir las columnas de dimensiones y ocultar la columna estándar de “Cantidad”
 
