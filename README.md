@@ -119,3 +119,7 @@ Integrar un cálculo con el módulo del inventario para que el stock se controle
 Extender la cobertura de los test.
 
 
+## 👤 Autor
+- **Dylan Venegas Lopez**  
+
+
