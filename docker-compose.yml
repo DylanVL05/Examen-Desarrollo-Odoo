@@ -3,7 +3,7 @@ name: proyecto-examenodoo
 
 services:
   db:
-    image: postgres:15
+    image: postgres:16
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: odoo
@@ -59,3 +59,4 @@ services:
 volumes:
   db-data:
   odoo-data:
+
