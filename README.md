@@ -38,7 +38,7 @@ el sales para a continuacion activar el modulo " Dimensional Sales (Qty from L×
 
 ## Correr la prueba o test  
 
-    Parar la ejecucion actual del test se hace luego de levantar el docker (ya sea win o linux) prepare un script que se debe ejecutar luego de tener el container up , dicho script ejecuta las pruebas de forma aislada en una base momentanea para hacer el test lo completa y luego cierra
+ Parar la ejecucion actual del test se hace luego de levantar el docker (ya sea win o linux) prepare un script que se debe ejecutar luego de tener el container up , dicho script ejecuta las pruebas de forma aislada en una base momentanea para hacer el test lo completa y luego cierra
 
    1. **Si se ejecuta en Linux se debe ejecutar** "run_test.sh"
       ```bash
