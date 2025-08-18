@@ -40,13 +40,13 @@ el sales para a continuacion activar el modulo " Dimensional Sales (Qty from L×
 
     Parar la ejecucion actual del test se hace luego de levantar el docker (ya sea win o linux) prepare un script que se debe ejecutar luego de tener el container up , dicho script ejecuta las pruebas de forma aislada en una base momentanea para hacer el test lo completa y luego cierra
 
-    1. **Si se ejecuta en Linux se debe ejecutar** "run_test.sh"
-       ```bash
+   1. **Si se ejecuta en Linux se debe ejecutar** "run_test.sh"
+      ```bash
         sudo ./run_test.sh
 
     
-    2. **Si se ejecuta en windows se debe ejecutar** "run_test.ps1"
-   
+2. **Si se ejecuta en windows se debe ejecutar** "run_test.ps1"
+    
     - Abres powershell como administrador
     -vas a cd C:\ruta\a\proyecto-ExamenOdoo
     - Y ejecutas .\run_tests.ps1
@@ -74,9 +74,48 @@ El cálculo de cantidad se realiza como:
 
 
 
+## 📌 Suposiciones y Decisiones
+
+### Suposiciones
+
+El cálculo automático de cantidad (product_uom_qty) aplica a líneas de pedido en ventas y se basa en las dimensiones ingresadas (Largo, Ancho y Alto)
+
+Los usuarios deben ingresar siempre valores positivos , de no ingresar dimensiones aparecera una excepcion 
+
+El modulo esta pensado para escenarios donde los productos se cotizan por volumen o medida ( ejem materiales de construccion)
+
+Las unidades de las dimensiones están expresadas en metros (m) y se asume que el resultado (L×A×H) equivale a la cantidad en metros cúbicos.
+
+EL reporte de PDF  solo esconde cantidad en el saleorder ya que en la factura se debe dar otra vista heredada de otro QWEB , 
+
+El reporte PDF de venta se hereda del estándar de Odoo y se modifica únicamente para añadir las columnas de dimensiones y ocultar la columna estándar de “Cantidad”
+
+### Decisiones 
+
+Como ambiente lo trabaje en un docker compose y se desarrollo en Ubuntu linux en Visual Studio Code 
+
+Se heredo el modelo sale.order.line para no tocar la logica del core
+
+Para correr los test hice 2 scripts , uno en Shell y otro en Powershell para compatibilidad del test de integracion tanto en Windows como en linux 
+
+Opte por usar una bd momentanea a la hora de hacer los test de integracion para no ensuciar la principal , esta se crea y se elimina luego de pasar los test
+
+## Alcance del modulo 
     
+Cálculo automático de cantidad en líneas de venta a partir de L×A×H.
 
+Vistas actualizadas (formulario, árbol y reporte PDF) que incluyen dimensiones.
 
+Validaciones básicas en la captura de datos (dimensiones > 0).
 
+Compatibilidad con Odoo 18.0 y PostgreSQL 16, probado en contenedor Docker.
+
+## Posibles mejoras
+
+Agregar la funcion de conversion 
+
+Integrar un calculo con el modulo del inventario para que el stock se controle segun el volumen calculado 
+
+Extender la cobertura de los test 
 
 
