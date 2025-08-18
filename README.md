@@ -64,12 +64,12 @@ El cálculo de cantidad se realiza como:
    "Cantidad = Largo × Ancho × Alto"  (interpretado en metros cubicos si las dimensiones estan en metros)
       
 
-      -En caso de que el producto posee una UoM distinta no se realiza conversion automatica, en este caso hay 2 opciones:
+   -En caso de que el producto posee una UoM distinta no se realiza conversion automatica, en este caso hay 2 opciones:
 
-      1.Configurar la unidad de medida base
+   1.Configurar la unidad de medida base
 
-      2.Agregar en el modulo la capacidad de conversion utilizando
-      product_uom._compute_quantity(...)
+   2.Agregar en el modulo la capacidad de conversion utilizando
+   product_uom._compute_quantity(...)
 
 
 
@@ -92,13 +92,13 @@ El reporte PDF de venta se hereda del estándar de Odoo y se modifica únicament
 
 ### Decisiones 
 
-Como ambiente lo trabaje en un docker compose y se desarrollo en Ubuntu linux en Visual Studio Code 
+Como ambiente lo trabajé en un Docker Compose y se desarrolló en Ubuntu Linux en Visual Studio Code.
 
-Se heredo el modelo sale.order.line para no tocar la logica del core
+Se heredó el modelo sale.order.line para no tocar la lógica del core.
 
-Para correr los test hice 2 scripts , uno en Shell y otro en Powershell para compatibilidad del test de integracion tanto en Windows como en linux 
+Para correr los test hice 2 scripts, uno en Shell y otro en PowerShell, para compatibilidad del test de integración tanto en Windows como en Linux.
 
-Opte por usar una bd momentanea a la hora de hacer los test de integracion para no ensuciar la principal , esta se crea y se elimina luego de pasar los test
+Opté por usar una BD momentánea a la hora de hacer los test de integración para no ensuciar la principal; esta se crea y se elimina luego de pasar los test.
 
 ## Alcance del modulo 
     
@@ -112,10 +112,10 @@ Compatibilidad con Odoo 18.0 y PostgreSQL 16, probado en contenedor Docker.
 
 ## Posibles mejoras
 
-Agregar la funcion de conversion 
+Agregar la función de conversión.
 
-Integrar un calculo con el modulo del inventario para que el stock se controle segun el volumen calculado 
+Integrar un cálculo con el módulo del inventario para que el stock se controle según el volumen calculado.
 
-Extender la cobertura de los test 
+Extender la cobertura de los test.
 
 
