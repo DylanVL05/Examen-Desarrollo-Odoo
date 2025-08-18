@@ -48,7 +48,11 @@ el sales para a continuacion activar el modulo " Dimensional Sales (Qty from L×
 2. **Si se ejecuta en windows se debe ejecutar** "run_test.ps1"
     
     - Abres powershell como administrador
-    -vas a cd C:\ruta\a\proyecto-ExamenOdoo
+
+    -vas a cd \ruta\a\proyecto-ExamenOdoo
+
+    -Permitir la ejecución de scripts solo en esta sesión con : Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+
     - Y ejecutas .\run_tests.ps1
 
       
